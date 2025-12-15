@@ -18,12 +18,12 @@ Applikationen ska redovisas fullt fungerande i webbläsaren tillsammans med sin 
   - Jobba utifrån perspektivet att en utomstående person enkelt ska kunna förstå och jobba vidare med projektet i framtiden.
 - **bestå av ett flertal komponenter och views** (klar)
   - Mer detaljerad information om detta finns nedan.
-- **utnyttja state och omrendering vid något tillfälle** (inte klar)
+- **utnyttja state och omrendering vid något tillfälle** (klar)
   - Det ska finnas state-variabler, antingen direkt i tillhörande moduler eller i en globalt tillgänglig store. När en state-variabels värde uppdateras ska sidan/modulen renderas om för att demonstrera det uppdaterade värdet. Utan detta förblir sidan statisk.
   WTF?
 - **innehålla någon form av interaktivitet** (yes)
   - Blanda statiska och dynamiska filer. Experimentera med båda koncepten och injecera JavaScript-logik där det behövs. Det är inget fel i att bygga en app helt utan statiska sidor om det visar sig vara bäst. Uppgiftens huvudfokus är JavaScript. Rå HTML är ni redan välbekanta med.
-- **hämta data från ett API** (nej, men easy as fuck go in på chatgpt bara)
+- **hämta data från ett API** (klar,)
   - Förslag på public APIs finns överallt på nätet, i [js--fetch-intro](https://github.com/chas-academy/js--fetch-intro) eller längst ned i [Frontendresurser](https://www.notion.so/chasacademy/Frontend-250d1037d091808e8f5be682f4afbefb).
 - **kunna komplieras till JavaScript och byggas** (yes)
   - Appen ska i praktiken kunna deployas och fungera i en live-miljö. Deployment kommer inte att vara en del av uppgiften, men TypeScript och bundlern ska kunna bygga en `dist`-mapp med alla relevanta filer.
@@ -32,7 +32,7 @@ Applikationen ska redovisas fullt fungerande i webbläsaren tillsammans med sin 
 
 - **Alla gruppmedlemmar ska ha pushat commits**
   - Fördela ansvaret för versionshantering så jämnt som möjligt. Byt person som utför git-kommandon vid varje arbetstillfälle. Det är starkt rekommenderat att jobba med branches, pull requests och code reviews för att få övning i det. Läs mer om riktlinjerna kring grupparbete i Canvas vid oklarheter.
-- **En del av applikationen (Förslagsvis en view, page eller ett flertal components) ska byggas eller refaktoreras av AI**
+- **En del av applikationen (Förslagsvis en view, page eller ett flertal components) ska byggas eller refaktoreras av AI** (inte klar)
   - Tillvägagångssättet och era reflektioner kring detta ska redovisas tillsammans med applikationen.
   WTF?
 ## 🦮 Riktlinjer

@@ -6,7 +6,7 @@ export function generateRandomInt(min: number, max: number,) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-export default function integerGenerator() {
+export default function integerGenerator() { // Bygger upp all HTML som visas (input-fält, knapp och resultat-box).
   const view = document.createElement("div");
   view.classList.add("generator-view");
   view.innerHTML = `
@@ -24,7 +24,7 @@ export default function integerGenerator() {
     </div>
   `;
 
-  const minInput = view.querySelector("#min-input");
+  const minInput = view.querySelector("#min-input"); // Hämtar referenser till alla HTML-element vi behöver interagera med (input, knapp, output).
   const maxInput = view.querySelector("#max-input");
   const generateButton = view.querySelector("#generate-button");
   const resultOutput = view.querySelector("#result-output");
@@ -33,19 +33,19 @@ export default function integerGenerator() {
     const min = parseInt(minInput.value);
     const max: m = parseInt(maxInput.value);
 
-    if (isNaN(min) || isNaN(max) || min > max) {
+    if (isNaN(min) || isNaN(max) || min > max) { // Enkel validering: Kollar om värdena är ogiltiga eller om min > max.
       resultOutput!.textContent = "Ogiltigt intervall!";
       (resultOutput as HTMLElement)!.style.color = "red";
       return;
     }
     resultOutput.style.color = "black";
-    const value = generateRandomInt(min, max);
+    const value = generateRandomInt(min, max); // Kör funktionen som räknar fram slumptalet och visar resultatet.
     resultOutput.textContent = value;
   };
 
-  if (generateButton) {
+  if (generateButton) { // Kopplar 'handleGenerate' till klick-eventet på knappen.
     generateButton.addEventListener("click", handleGenerate);
   }
 
-  return view;
+  return view; // Returnerar hela den färdiga komponenten.
 }

@@ -5,7 +5,8 @@ import contactHTML from "./views/static/contact/index.html?raw";
 // import footer from "./views/dynamic/footer";
 // import integerGenerator from "./views/dynamic/integerGenerator";
 // import uuidGenerator from "./views/dynamic/uuidGenerator";
-
+// Huvudlogiken för generatorn. En ren funktion som bara räknar.
+// Bra för att visa stark typning och att logiken är testbar.
 const getCurrentPage = () => {
   const currentPage = window.location.pathname;
 
