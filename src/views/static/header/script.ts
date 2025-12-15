@@ -1,4 +1,6 @@
-function generateRandomInt(min, max) {
+
+     //  ! = fixar undefined error ifall du använder det som en metod, e.g const a = b.!
+export function generateRandomInt(min: number, max: number,) {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -29,11 +31,11 @@ export default function integerGenerator() {
 
   const handleGenerate = () => {
     const min = parseInt(minInput.value);
-    const max = parseInt(maxInput.value);
+    const max: m = parseInt(maxInput.value);
 
     if (isNaN(min) || isNaN(max) || min > max) {
-      resultOutput.textContent = "Ogiltigt intervall!";
-      resultOutput.style.color = "red";
+      resultOutput!.textContent = "Ogiltigt intervall!";
+      (resultOutput as HTMLElement)!.style.color = "red";
       return;
     }
     resultOutput.style.color = "black";
