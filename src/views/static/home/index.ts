@@ -1,41 +1,56 @@
-// src/home/index.ts (uppdaterad version för att inkludera API-logiken)
+// home.ts
+// Fix: Gör HomePageView synkron så att den omedelbart kan returnera ett element till main.ts.
+// API-hämtningen (fetchPosts) sker nu separat i bakgrunden.
 
-import { fetchPosts, Post } from '../api/data-service'; //Importerar vår API-tjänst och Post-typen.
+import { fetchPosts, type Post } from "../../../api/data-service"; // Dubbelkolla sökvägen till data-service!
 
-export async function HomePageView(): Promise<HTMLDivElement> {
-    const view = document.createElement('div');
-    view.classList.add('home-view');
-    view.innerHTML = '<h2>API-data från JSONPlaceholder</h2><p>Laddar inlägg...</p>'; //Den här vyn måste vara asynkron eftersom den anropar en asynkron funktion.
+// Funktion som skapar och returnerar DOM-elementet (synkront)
+export default function HomePageView(): Node { 
+    const view = document.createElement("div");
+    view.classList.add("home-view");
+    
+    // Visar ett laddningsmeddelande direkt. Detta element returneras till main.ts
+    view.innerHTML = `<h2>API-data från JSONPlaceholder</h2><p>Laddar inlägg...</p>`;
 
+    // Anropa den asynkrona funktionen separat för att hämta data
+    fetchAndRenderPosts(view);
+    
+    // Returnerar elementet OMEDELBART (vilket löser felet i main.ts)
+    return view; 
+}
+
+
+// Asynkron funktion som hanterar datahämtning och uppdaterar elementet
+async function fetchAndRenderPosts(view: HTMLElement) {
     try {
         const posts: Post[] = await fetchPosts();
-
-        // Rensa "Laddar..." meddelandet
-        view.innerHTML = '<h2>API-data från JSONPlaceholder</h2>'; //Visar ett laddningsmeddelande medan vi väntar på API:et.
+        
+        // Rensa laddningsmeddelandet
+        view.innerHTML = `<h2>API-data från JSONPlaceholder</h2>`; 
 
         if (posts.length === 0) {
-            view.innerHTML += '<p>Kunde inte ladda inlägg eller inga inlägg hittades.</p>';
-            return view;
+            view.innerHTML += `<p>Kunde inte ladda inlägg eller inga inlägg hittades.</p>`;
+            return;
         }
 
-        const list = document.createElement('ul'); //Här hämtas datan. await pausar vyn tills vi har fått alla inlägg.
-        list.classList.add('post-list');
-        
-        posts.forEach(post => {
-            const listItem = document.createElement('li');
+        const list = document.createElement("ul");
+        list.classList.add("post-list");
+
+        posts.forEach((post) => {
+            const listItem = document.createElement("li");
             listItem.innerHTML = `
                 <h4>${post.id}. ${post.title}</h4>
-                <p>${post.body.substring(0, 100)}...</p> //Bygger upp HTML för listan och använder de typade fälten (id, title, body).
-            // substring används för att korta ner texten lite.
+                <p>${post.body.substring(0, 100)}...</p>
             `;
-            list.appendChild(listItem); // Lägger till elementet i UL-listan.
+            list.appendChild(listItem);
         });
 
-        view.appendChild(list); // Hela den färdiga listan läggs till i huvudvyn.
+        view.appendChild(list); 
 
     } catch (error) {
-        view.innerHTML = `<h2>API-data</h2><p style="color: red;">Ett fel uppstod vid hämtning av data: ${error.message}</p>`; // Fångar upp fel om API-anropet misslyckades (t.ex. nätverket dog). // Visar ett rött felmeddelande direkt i vyn istället för att krascha appen.
-} 
-    }
 
-    return view; // Returnerar det färdiga HTML-elementet till main.ts.
+
+        
+        view.innerHTML = `<h2>API-data</h2><p style="color: red;">Ett fel uppstod vid hämtning av data: ${error.message}</p>`;
+    }
+}

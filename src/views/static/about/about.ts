@@ -1,7 +1,7 @@
 // src/main.ts
 import "./style.css";
 import Navbar from "./components/navbar/navbar.ts";
-import header from "./views/static/header/script.ts";
+import header from "./views/static/header/script";
 import contactHTML from "./views/static/contact/index.html?raw";
 import home from "./views/static/home";
 import homePageView from "./views/static/home/index";
